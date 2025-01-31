@@ -1,7 +1,7 @@
 import json
+from os import PathLike
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 from bofire.data_models.domain.api import Domain, Inputs, Outputs
 from bofire.data_models.features.api import (
@@ -16,7 +16,7 @@ from .bandit import BanditBenchmark
 
 class MAXBandit(BanditBenchmark):
     def __init__(
-        self, data_path: Path | str | None = None, target="K_exp", negate=True, **kwargs
+        self, target="K_exp", data_path: PathLike[str] | None = None, **kwargs
     ):
         self._domain = Domain(
             inputs=Inputs(
@@ -73,35 +73,21 @@ class MAXBandit(BanditBenchmark):
                 features=[ContinuousOutput(key=target, objective=MinimizeObjective())]
             ),
         )
+        super().__init__(**kwargs)
 
+    def _load_data(self, data_path: str | Path | None = None, **kwargs) -> pd.DataFrame:
         if data_path is None:
             data_path = Path(__file__).parent.joinpath("data/MAX_data.json")
             if not data_path.exists():
                 raise FileNotFoundError(f"Data file not found at {data_path}")
-        self.data = self._load_data_from_path(data_path)
 
-        if negate:
-            self.data[target] *= -1  # turn into a minimize problem
-
-    def _load_data_from_path(self, data_path: str):
         with open(data_path, "r") as f:
             data = json.load(f)
 
         df = pd.DataFrame(
             data, columns=self.domain.inputs.get_keys() + self.domain.outputs.get_keys()
         )
-        assert (
-            not df[self.domain.outputs.get_keys()].isna().all().any()
-        ), "Target column(s) do not exist."
+        assert not df[self.domain.outputs.get_keys()].isna().all().any(), (
+            "Target column(s) do not exist."
+        )
         return df
-
-    def _f(self, X: pd.DataFrame, **kwargs):
-        idx = self.data.iloc[:, :-1].eq(X.iloc[0, :-1]).all(axis=1).idxmax()
-        return self.data.iloc[idx][self.domain.outputs.get_keys()]
-
-    def f_by_idx(self, idx: np.ndarray | int):
-        return self.data.iloc[idx]
-
-    def get_optima(self):
-        opt_idx = self.data["y"].idxmin()
-        return self.data.iloc[opt_idx]
