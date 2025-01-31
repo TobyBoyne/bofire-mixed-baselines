@@ -25,7 +25,6 @@ except ImportError:
     )
 
 
-
 def _bofire_feat_to_smac(feat: AnyFeature):
     if isinstance(feat, ContinuousInput):
         return cs.Float(name=feat.key, bounds=get_feature_bounds(feat))

@@ -21,7 +21,6 @@ except ImportError:
     )
 
 
-
 class BARTSurrogate(Surrogate, TrainableSurrogate):
     def __init__(self, data_model: BARTSurrogateDataModel):
         self.seed = data_model.seed
@@ -52,7 +51,7 @@ class BARTSurrogate(Surrogate, TrainableSurrogate):
 
         train_y = self.scalar(Y.to_numpy(), train=True).flatten()
         with pm.Model() as bart_model:
-            X = pm.Data("X", transformed_X.to_numpy()) 
+            X = pm.Data("X", transformed_X.to_numpy())
             m = pmb.BART("m", X=X, Y=train_y, m=50, split_rules=split_rules)
             s = pm.InverseGamma("s", alpha=nu / 2, beta=nu * t / 2)
             pm.Normal("y_pred", mu=m, sigma=s, observed=train_y, shape=m.shape)
@@ -89,7 +88,6 @@ class BARTSurrogate(Surrogate, TrainableSurrogate):
         var = y_pred.var(dim=["chain", "draw"])
         mu, var = self.scalar.untransform_mu_var(mu, var)
         return mu.to_numpy().reshape(-1, 1), np.sqrt(var).to_numpy().reshape(-1, 1)
-
 
     def _dumps(self):
         pass

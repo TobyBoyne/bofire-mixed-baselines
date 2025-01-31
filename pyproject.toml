@@ -1,18 +1,21 @@
-[tool.poetry]
+[project]
 name = "bofire-mixed-baselines"
 version = "0.1.0"
 description = "Strategies, surrogates and benchmarks for mixed-feature domains."
-authors = ["Toby Boyne <tobyboyne@gmail.com>"]
+authors = [
+    { name = "Toby Boyne", email = "tobyboyne@gmail.com" }
+]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
 bofire = {extras = ["cheminfo", "optimization"], version = "^0.0.16"}
 
-
-[tool.poetry.group.surrogates.dependencies]
-pymc-bart = "^0.8.2"
-xgboost = "^2.1.3"
+[project.optional-dependencies]
+surrogates = [
+    "pymc-bart~=0.8.2",
+    "xgboost~=2.1.3"
+]
 
 [build-system]
 requires = ["poetry-core"]

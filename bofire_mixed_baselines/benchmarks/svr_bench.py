@@ -17,12 +17,11 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVR
 
-try: 
+try:
     from xgboost import XGBRegressor
 except ImportError:
     warnings.warn(
-        "xgboost not installed. Please install it to use "
-        "BoFire's `SVRBench`.",
+        "xgboost not installed. Please install it to use BoFire's `SVRBench`.",
         ImportWarning,
     )
 

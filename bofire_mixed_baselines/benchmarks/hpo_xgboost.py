@@ -15,7 +15,7 @@ from sklearn import datasets, metrics, model_selection
 
 from bofire_mixed_baselines.domain_utils import build_integer_input
 
-try: 
+try:
     from xgboost import XGBClassifier
 except ImportError:
     warnings.warn(

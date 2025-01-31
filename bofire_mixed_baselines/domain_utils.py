@@ -13,6 +13,7 @@ def build_integer_input(*, key: str, unit: str | None = None, bounds: tuple[int,
     values = list(range(lb, ub + 1))
     return DiscreteInput(key=key, unit=unit, values=values)
 
+
 def get_feature_bounds(
     feature: AnyFeature, encoding: Literal["bitmask", "ordinal"] | None = None
 ) -> tuple[float, float] | list[str] | list[int]:

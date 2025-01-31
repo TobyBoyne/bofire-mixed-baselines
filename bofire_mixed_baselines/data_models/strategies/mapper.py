@@ -13,7 +13,9 @@ STRATEGY_MAP = {
 }
 
 
-def strategy_map(data_model: strategies_data_models.Strategy) -> bmb_data_models.AnyStrategy:
+def strategy_map(
+    data_model: strategies_data_models.Strategy,
+) -> bmb_data_models.AnyStrategy:
     if data_model.__class__ not in STRATEGY_MAP:
         return bofire_map_strategy(data_model)
     cls = STRATEGY_MAP[data_model.__class__]
