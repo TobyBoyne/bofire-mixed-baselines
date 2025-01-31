@@ -73,7 +73,7 @@ class MAXBandit(BanditBenchmark):
                 features=[ContinuousOutput(key=target, objective=MinimizeObjective())]
             ),
         )
-        super().__init__(**kwargs)
+        super().__init__(data_path=data_path, **kwargs)
 
     def _load_data(self, data_path: str | Path | None = None, **kwargs) -> pd.DataFrame:
         if data_path is None:

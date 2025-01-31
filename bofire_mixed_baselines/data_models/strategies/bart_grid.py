@@ -25,7 +25,7 @@ from bofire_mixed_baselines.data_models.surrogates.bart import BARTSurrogate
 
 
 class BARTGridStrategy(PredictiveStrategy):
-    type: Literal["SMACStrategy"] = "SMACStrategy"
+    type: Literal["BARTGridStrategy"] = "BARTGridStrategy"
     surrogate_specs: BARTSurrogate
 
     @classmethod

@@ -18,7 +18,7 @@ class BanditBenchmark(Benchmark):
         pass
 
     def _f(self, candidates):
-        return self.data.loc[candidates.index]
+        return self.data.loc[candidates.index][self.domain.outputs.get_keys()]
 
     def get_optima(self):
         opt_idx = self.data[self.domain.outputs.get_keys()[0]].idxmin()

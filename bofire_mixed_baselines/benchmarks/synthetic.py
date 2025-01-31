@@ -28,7 +28,7 @@ class DiscreteAckley(Benchmark):
                         for i in range(discrete_dim)
                     ),
                     *(
-                        ContinuousInput(key=f"x_{i+discrete_dim}", bounds=(-1.0, 1.0))
+                        ContinuousInput(key=f"x_{i + discrete_dim}", bounds=(-1.0, 1.0))
                         for i in range(cont_dim)
                     ),
                 ]
@@ -56,6 +56,13 @@ class DiscreteAckley(Benchmark):
         )
         return pd.DataFrame(data=y[:, None], columns=self.domain.outputs.get_keys())
 
+    def get_optima(self):
+        data = [0 for _ in range(self.dim)] + [0]
+        return pd.DataFrame(
+            data=data,
+            columns=self.domain.inputs.get_keys() + self.domain.outputs.get_keys(),
+        )
+
 
 class DiscreteRosenbrock(Benchmark):
     """Adapted from: https://arxiv.org/pdf/2210.10199"""
@@ -71,7 +78,9 @@ class DiscreteRosenbrock(Benchmark):
                         for i in range(discrete_dim)
                     ),
                     *(
-                        ContinuousInput(key=f"x_{i+discrete_dim}", bounds=(-5.0, 10.0))
+                        ContinuousInput(
+                            key=f"x_{i + discrete_dim}", bounds=(-5.0, 10.0)
+                        )
                         for i in range(cont_dim)
                     ),
                 ]
@@ -91,3 +100,10 @@ class DiscreteRosenbrock(Benchmark):
             100 * (z[:, 1:] - z[:, :-1] ** 2) ** 2 + (1 - z[:, :-1]) ** 2, axis=1
         )
         return pd.DataFrame(data=y[:, None], columns=self.domain.outputs.get_keys())
+
+    def get_optima(self):
+        data = [1 for _ in range(self.dim)] + [0]
+        return pd.DataFrame(
+            data=data,
+            columns=self.domain.inputs.get_keys() + self.domain.outputs.get_keys(),
+        )
