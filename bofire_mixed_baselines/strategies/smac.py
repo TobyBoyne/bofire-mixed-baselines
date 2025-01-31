@@ -1,4 +1,4 @@
-import logging
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -13,7 +13,6 @@ from bofire.strategies.api import PredictiveStrategy
 
 from bofire_mixed_baselines.data_models.strategies.smac import SMACStrategy as DataModel
 from bofire_mixed_baselines.domain_utils import get_feature_bounds
-import warnings
 
 try:
     import ConfigSpace as cs

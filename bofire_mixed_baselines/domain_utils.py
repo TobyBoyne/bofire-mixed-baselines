@@ -1,6 +1,12 @@
-from bofire.data_models.features.api import DiscreteInput
 from typing import Literal
-from bofire.data_models.features.api import CategoricalInput, ContinuousInput, AnyFeature
+
+from bofire.data_models.features.api import (
+    AnyFeature,
+    CategoricalInput,
+    ContinuousInput,
+    DiscreteInput,
+)
+
 
 def build_integer_input(*, key: str, unit: str | None = None, bounds: tuple[int, int]):
     lb, ub = bounds

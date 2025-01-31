@@ -1,6 +1,6 @@
 import pathlib
-from typing import List, Tuple
 import warnings
+from typing import List, Tuple
 
 import numpy as np
 import pandas as pd
@@ -16,6 +16,7 @@ from sklearn.metrics import mean_squared_error
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVR
+
 try: 
     from xgboost import XGBRegressor
 except ImportError:
@@ -26,6 +27,7 @@ except ImportError:
     )
 
 from bofire_mixed_baselines.domain_utils import build_integer_input
+
 
 class SVRBench(Benchmark):
     def __init__(

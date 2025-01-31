@@ -1,6 +1,7 @@
+import warnings
+
 import numpy as np
 import pandas as pd
-import warnings
 from bofire.data_models.features.api import CategoricalInput
 from bofire.surrogates.api import Surrogate, TrainableSurrogate
 
@@ -10,9 +11,9 @@ from bofire_mixed_baselines.data_models.surrogates.bart import (
 from bofire_mixed_baselines.surrogates.scaler import Standardize
 
 try:
-    import pymc_bart as pmb
+    import arviz as az
     import pymc as pm
-    import arviz as az    
+    import pymc_bart as pmb
 except ImportError:
     warnings.warn(
         "pymc-bart not installed. BART surrogate cannot be used.",

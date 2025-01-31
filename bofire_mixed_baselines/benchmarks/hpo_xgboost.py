@@ -1,6 +1,7 @@
 """https://github.com/huawei-noah/HEBO/blob/master/MCBO/mcbo/tasks/xgboost_opt/xgboost_opt_task.py"""
 
 import warnings
+
 import pandas as pd
 from bofire.benchmarks.api import Benchmark
 from bofire.data_models.domain.api import Domain, Inputs, Outputs

@@ -13,7 +13,6 @@ from pandas import DataFrame
 from bofire_mixed_baselines.domain_utils import build_integer_input
 
 
-
 class DiscreteAckley(Benchmark):
     """
     adapted from: https://arxiv.org/pdf/2210.10199"""
